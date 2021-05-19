@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/BMscis/btccsv/protos"
+	"github.com/BMscis/btccsv/btc-csv/protos"
 	"github.com/chainswatch/bclib/btc"
 	"github.com/chainswatch/bclib/models"
 	"github.com/chainswatch/bclib/serial"

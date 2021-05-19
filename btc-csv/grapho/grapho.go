@@ -8,8 +8,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
 
-	"github.com/BMscis/btccsv/neo4jcsv"
-	"github.com/BMscis/btccsv/timelog"
+	"github.com/BMscis/btccsv/btc-csv/neo4jcsv"
+	"github.com/BMscis/btccsv/btc-csv/timelog"
 
 	"github.com/chainswatch/bclib/models"
 	"github.com/chainswatch/bclib/serial"

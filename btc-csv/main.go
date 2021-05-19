@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/BMscis/btccsv/grapho"
+	"github.com/BMscis/btccsv/btc-csv/grapho"
 
 	"github.com/chainswatch/bclib/btc"
 	"github.com/joho/godotenv"
