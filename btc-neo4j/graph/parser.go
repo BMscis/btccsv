@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/wallerprogramm/btc-neo4j/neo4jdb"
+	"github.com/BMscis/btccsv/btc-neo4j/neo4jdb"
 
 	"github.com/chainswatch/bclib/btc"
 	"github.com/chainswatch/bclib/models"

@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/BMscis/btccsv/protos"
 	"github.com/chainswatch/bclib/btc"
 	"github.com/chainswatch/bclib/models"
 	"github.com/chainswatch/bclib/serial"
 	"github.com/golang/protobuf/proto"
 	logs "github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
-	"github.com/BMscis/btccsv.git/protos"
 )
 
 func decodeInputs(tx *models.Tx, txid string, writer Writer, utxo *leveldb.DB) error {
