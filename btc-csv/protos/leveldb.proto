@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package protos;
+
+message TxOutput {
+	string addr = 1;
+	uint64 value = 2;
+}

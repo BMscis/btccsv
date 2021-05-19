@@ -1,0 +1,56 @@
+%spark.dep
+z.load("org.opencypher:spark-cypher:0.2.3")
+
+
+Title: Imports and CAPS session
+
+import org.opencypher.spark.api._
+import org.opencypher.okapi.api.graph._
+import org.opencypher.okapi.neo4j.io.Neo4jConfig
+import java.net.URI
+import org.opencypher.okapi.api.util.ZeppelinSupport._
+
+// Create CAPS session
+  implicit val session: CAPSSession = CAPSSession.create(spark)
+
+Title: Neo4j test
+%neo4j
+MATCH (n:Transaction)
+RETURN n
+LIMIT 50
+
+
+Title: Apply multi-input heuristic
+
+// Connect to a Neo4j instance and populate it with social network data
+  // To run a test instance you may use
+  //  ./gradlew :okapi-neo4j-io-testing:neo4jStart
+  //  ./gradlew :okapi-neo4j-io-testing:neo4jStop
+val neo4j = connectNeo4j(personNetwork)
+
+// Register Property Graph Data Sources (PGDS)
+session.registerSource(Namespace("txGraph"), GraphSources.cypher.neo4j(neo4j.config))
+
+// Access the graphs via their qualified graph names
+val txGraph = session.catalog.graph("txGraph.graph")
+
+// Query for multi-inputs and create new edges between addresses that belong together
+  val addressGraph = txGraph.cypher(
+    """|FROM GRAPH txGraph.graph
+       |MATCH (a1:Address)-[:SENDS]->(t)<-[:SENDS]-(a2:Address)
+       |CONSTRUCT
+       |  CREATE (a1)-[:IS_SAME]->(a2)
+       |RETURN GRAPH
+    """.stripMargin).graph
+
+// Use the Neo4jGraphMerge utility to write the products and the recommendations back to Neo4j
+
+  // Define the node and relationship keys
+  // Note that in this example we assume that names and titles uniquely identify people and products
+  val nodeKeys = Map("Address" -> Set("address"))
+
+  // Write the recommendations back to Neo4j
+  Neo4jGraphMerge.merge(entireGraphName, addressGraph, neo4j.config, Some(nodeKeys))
+  
+  // Clear Neo4j test instance and close session / driver
+  neo4j.close()

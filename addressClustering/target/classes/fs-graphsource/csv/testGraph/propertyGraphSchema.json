@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "labelPropertyMap": [
+    {
+      "labels": [
+        "Address"
+      ],
+      "properties": {
+        "address": "STRING"
+      }
+    },
+    {
+      "labels": [
+        "Transaction"
+      ],
+      "properties": {
+        "txid": "STRING"
+      }
+    }
+  ],
+  "relTypePropertyMap": [
+    {
+      "relType": "SENDS",
+      "properties": {
+        "value": "INTEGER"
+      }
+    }
+  ]
+}
