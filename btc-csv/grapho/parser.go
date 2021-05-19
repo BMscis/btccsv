@@ -11,7 +11,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	logs "github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
-	"github.com/wallerprogramm/btc-csv/protos"
+	"github.com/BMscis/btccsv.git/protos"
 )
 
 func decodeInputs(tx *models.Tx, txid string, writer Writer, utxo *leveldb.DB) error {
